@@ -1,3 +1,9 @@
+## custom stuff ###############################################################
+# linux desktop stuff
+.directory
+
+## github default #############################################################
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -51,39 +57,13 @@ coverage.xml
 
 # Django stuff:
 *.log
-local_settings.py
-
-# Flask stuff:
-instance/
-.webassets-cache
-
-# Scrapy stuff:
-.scrapy
+static/
 
 # Sphinx documentation
 docs/_build/
 
 # PyBuilder
-target/
+target/ 
 
-# IPython Notebook
-.ipynb_checkpoints
-
-# pyenv
-.python-version
-
-# celery beat schedule file
-celerybeat-schedule
-
-# dotenv
-.env
-
-# virtualenv
-venv/
-ENV/
-
-# Spyder project settings
-.spyderproject
-
-# Rope project settings
-.ropeproject
+## ECHO #######################################################################
+db.sqlite3
