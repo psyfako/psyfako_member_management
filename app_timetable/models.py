@@ -9,5 +9,5 @@ class Slot(models.model):
         abstract=True
         
     
-class OpenSpaceSlot(Slot):
+#class OpenSpaceSlot(Slot):
     
