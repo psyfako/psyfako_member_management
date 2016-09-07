@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tagulous',
-    'psyfako_core',
+    'app_psyfako_core',
+    'app_timetable',
 ]
 
 MIDDLEWARE_CLASSES = [
