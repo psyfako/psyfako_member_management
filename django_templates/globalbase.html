@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<!-- https://docs.djangoproject.com/en/1.10/howto/static-files/#configuring-static-files -->
+{% load static %}
+
 <html>
 
     <head>
@@ -9,6 +12,8 @@
                 globalbase.html
             {% endblock %} 
         </title>
+        <link rel="icon" href="{% static 'favicon.ico' %}">
+
 
     </head>
     

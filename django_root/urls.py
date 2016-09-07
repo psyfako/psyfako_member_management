@@ -18,6 +18,12 @@ from django.conf.urls import include
 
 from django.contrib import admin
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 ]
+
+'''
+    TODO enable favicon
+    http://staticfiles.productiondjango.com/blog/failproof-favicons/
+'''

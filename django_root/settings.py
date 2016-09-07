@@ -70,6 +70,10 @@ TEMPLATES = [
     },
 ]
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "django_static"),
+]
+
 WSGI_APPLICATION = 'django_root.wsgi.application'
 
 
