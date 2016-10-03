@@ -1,6 +1,6 @@
 from django.db import models
 
-class Slot(models.model):
+class Slot(models.Model):
     name = models.CharField(max_length=100, blank=True)
     begin_time = models.DateTimeField()
     end_time = models.DateTimeField()
