@@ -22,8 +22,6 @@ class Member(models.Model):
     
     mobilephone = PhoneNumberField(blank=True)
     
-    mail = models.EmailField(max_length=254)
-    
     #Allergy tagging field comes here
     # allergys = 
     fachschaft = models.ForeignKey('Fachschaft', on_delete=models.CASCADE,)
