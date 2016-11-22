@@ -21,6 +21,13 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^', include('dashboard.urls')) ,
+    #url(r'^time/', include('timetable.urls')),
+    #url(r'^main/', include('psyfako_core.urls')),
+    
+    # bonus
+    url(r'^dashboard/', include('dashboard.urls')),
+    url(r'^dash/', include('dashboard.urls')),
 ]
 
 '''

@@ -41,9 +41,13 @@ class Common(Configuration):
         'django.contrib.sessions',
         'django.contrib.messages',
         'django.contrib.staticfiles',
+        # 3-party 
         'tagulous',
+        # ownstuff
         'psyfako_core',
         'timetable',
+        'dashboard',
+        
     ]
     
     MIDDLEWARE_CLASSES = [

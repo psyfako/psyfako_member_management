@@ -1,0 +1,33 @@
+{%extends 'globalbase.html'%} 
+
+<!-- head -->
+{% block css %}
+
+{% endblock css %}
+
+
+{% block title %} 
+    SUPER DUPER DASHBOARD 
+{% endblock title %}
+
+
+<!-- header -->
+{% block headertitle %}
+    SUPER DUPER DASHBOARD -  hopefully soon with unicorns
+{% endblock headertitle %}
+
+
+<!-- body -->
+{% block content %}
+<!--    <p>Hello {{ user.username }}</p>-->
+    <p>You are member of the following Groups:</p>
+<!--    <p>{{ user.groups.all.0 }}</p> -->
+<!--     itemiez with loop -->
+    <p>If you can see this AND your username the login was successful and the app seems to be working.</p>
+    <p>Now you should try to apply the @login_required decorator to your other apps.</p> 
+
+    <p>Actually this could be a super duper dashboard thingy - maybe built one later!</p>
+{% endblock content %}
+
+
+<!-- footer -->
