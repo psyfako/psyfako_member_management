@@ -222,19 +222,41 @@ class Common(Configuration):
     
     SITE_ID = 1
     
+    # enforce good passwords
+    AUTH_PASSWORD_VALIDATORS = [
+        {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
+        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+            'OPTIONS': {'min_length': 9, }
+        },
+    ]
+
     
     
-class dev(Common):
+class devlocal(Common):
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
     
+    # for local dev you need no password security :D
+    AUTH_PASSWORD_VALIDATORS = []
     
+    
+class devremote(Common):
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
+    
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+
+
 class stable(Common):
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
+    

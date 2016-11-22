@@ -4,7 +4,7 @@ import sys
 
 if __name__ == "__main__":
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "django_root.settings")
-    os.environ.setdefault('DJANGO_CONFIGURATION', 'dev')
+    os.environ.setdefault('DJANGO_CONFIGURATION', 'devlocal')
 
     from configurations.management import execute_from_command_line
 
