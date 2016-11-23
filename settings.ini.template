@@ -1,0 +1,17 @@
+[sql]
+
+NAME: dbaname
+USER: dbuser
+PASSWORD: passwort
+HOST: localhost
+PORT: 1433
+
+
+[admin]
+admin1 : mudder@deimudderisdeivadder.truth
+admin2 : vadder@deimudderisdeivadder.truth
+
+[hosts]
+allowed: deimudderisdeivadder.truth deivadderisdeimudder.lie
+
+    

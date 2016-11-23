@@ -15,7 +15,12 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+import random # SECRET KEY GENERATION
+import string # SECRET KEY GENERATION
+import configparser
 
+parsedconfig = config = configparser.ConfigParser()
+parsedconfig.read('settings.ini')
 
 from configurations import Configuration
 
@@ -23,13 +28,43 @@ class Common(Configuration):
     # Quick-start development settings - unsuitable for production
     # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
     
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
+    try:
+        SECRET_KEY
+        print('hardcoded SECRET_KEY was set in the settings.py - sure you want this? You know this is baaaaaad!')
+    except NameError:
+        SECRET_FILE = os.path.join(BASE_DIR, 'secret.txt')
+        try:
+            SECRET_KEY = open(SECRET_FILE).read().strip()
+            print('found a SECRET_KEY within the secret.txt')
+        except IOError:
+            try:
+                SECRET_KEY = ''.join([random.SystemRandom().choice(string.ascii_letters + string.digits + string.punctuation) for i in range(50)])
+                secret = open(SECRET_FILE, 'w')
+                secret.write(SECRET_KEY)
+                secret.close()
+                print('found no SECRET_KEY within the secret.txt | generating new secret key')
+            except IOError:
+                Exception('Please create a %s file with random characters \
+                to generate your secret key!' % SECRET_FILE)
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
     
-    ALLOWED_HOSTS = []
+    try:
+        ADMINS =tuple(parsedconfig.items('admin'))
+        print('found some ADMINS: ' + str(ADMINS))
+    except:
+        ADMINS = []
+        print('found no ADMINS using default: ' + str(ADMINS))
+
+    # fehlt hier bitte noch was ausdenken
+    try:
+        ALLOWED_HOSTS = parsedconfig.get('hosts','allowed').split()
+        print('found some ALLOWED_HOSTS:' + str(ALLOWED_HOSTS))
+    except:
+        ALLOWED_HOSTS = []
+        print('found no ALLOWED_HOSTS using default: ' + str(ALLOWED_HOSTS))
+
     
     
     # Application definition
@@ -237,29 +272,48 @@ class Common(Configuration):
 
     
     
-class devlocal(Common):
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
-    
+class devlocal(Common):  
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
+    
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
     
     # for local dev you need no password security :D
     AUTH_PASSWORD_VALIDATORS = []
     
     
 class devremote(Common):
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
-    
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
-
-
-class stable(Common):
-    # SECURITY WARNING: keep the secret key used in production secret!
-    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
     
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME'    : parsedconfig.get('sql','NAME'  ) ,
+            'USER'    : parsedconfig.get('sql','USER'  ) ,
+            'PASSWORD': parsedconfig.get('sql','PASSWORD') ,
+            'HOST'    : parsedconfig.get('sql','HOST'  ) ,
+            'PORT'    : parsedconfig.get('sql','PORT'  ) ,
+        }
+    }
+
+
+class stable(Common):   
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
     
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME'    : parsedconfig.get('sql','NAME'  ) ,
+            'USER'    : parsedconfig.get('sql','USER'  ) ,
+            'PASSWORD': parsedconfig.get('sql','PASSWORD') ,
+            'HOST'    : parsedconfig.get('sql','HOST'  ) ,
+            'PORT'    : parsedconfig.get('sql','PORT'  ) ,
+        }
+    }
