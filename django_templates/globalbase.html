@@ -26,10 +26,13 @@
         </h1>
         
         {% if user.is_authenticated %}
-            Hi {{ user.username }} you are Awesome!
-            <a href="{% url 'logout' %}">logout</a>
-        {% else %}
-            Hey you wanna <a href="{% url 'login' %}">login</a>
+            WAS IST DAS
+            <li>Hi {{ user.username }} you are Awesome!
+            <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+            <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+	{% else %}
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
         {% endif %}
     
     </header>

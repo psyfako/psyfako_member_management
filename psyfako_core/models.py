@@ -14,6 +14,10 @@ class Fachschaft(models.Model):
 
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    
+    name = models.CharField(max_length=240, blank=False) # actualy I dont give a crap how people want to be called therfore in field 
+    nickname = models.CharField(max_length=240, blank=True)
+    
     # extendet user stats
     address_street       = models.CharField(max_length=240, blank=True)
     address_streetnumber = models.IntegerField()
@@ -21,8 +25,6 @@ class Member(models.Model):
     address_citycode     = models.IntegerField()
     
     mobilephone = PhoneNumberField(blank=True)
-    
-    mail = models.EmailField(max_length=254)
     
     #Allergy tagging field comes here
     # allergys = 

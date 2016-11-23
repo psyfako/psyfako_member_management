@@ -43,6 +43,69 @@ class Common(Configuration):
         'django.contrib.staticfiles',
         # 3-party 
         'tagulous',
+        
+        # allauth        
+        'django.contrib.sites',
+        'allauth',
+        'allauth.account',
+        'allauth.socialaccount',
+        # ... include the providers you want to enable:
+        #'allauth.socialaccount.providers.amazon',
+        #'allauth.socialaccount.providers.angellist',
+        #'allauth.socialaccount.providers.asana',
+        #'allauth.socialaccount.providers.baidu',
+        #'allauth.socialaccount.providers.basecamp',
+        #'allauth.socialaccount.providers.bitbucket',
+        #'allauth.socialaccount.providers.bitbucket_oauth2',
+        #'allauth.socialaccount.providers.bitly',
+        #'allauth.socialaccount.providers.coinbase',
+        #'allauth.socialaccount.providers.digitalocean',
+        #'allauth.socialaccount.providers.douban',
+        #'allauth.socialaccount.providers.draugiem',
+        #'allauth.socialaccount.providers.dropbox',
+        #'allauth.socialaccount.providers.dropbox_oauth2',
+        #'allauth.socialaccount.providers.edmodo',
+        #'allauth.socialaccount.providers.eveonline',
+        #'allauth.socialaccount.providers.evernote',
+        #'allauth.socialaccount.providers.facebook',
+        #'allauth.socialaccount.providers.feedly',
+        #'allauth.socialaccount.providers.flickr',
+        #'allauth.socialaccount.providers.foursquare',
+        #'allauth.socialaccount.providers.fxa',
+        #'allauth.socialaccount.providers.github',
+        #'allauth.socialaccount.providers.gitlab',
+        #'allauth.socialaccount.providers.google',
+        #'allauth.socialaccount.providers.hubic',
+        #'allauth.socialaccount.providers.instagram',
+        #'allauth.socialaccount.providers.linkedin',
+        #'allauth.socialaccount.providers.linkedin_oauth2',
+        #'allauth.socialaccount.providers.mailru',
+        #'allauth.socialaccount.providers.odnoklassniki',
+        #'allauth.socialaccount.providers.openid',
+        #'allauth.socialaccount.providers.orcid',
+        #'allauth.socialaccount.providers.paypal',
+        #'allauth.socialaccount.providers.persona',
+        #'allauth.socialaccount.providers.pinterest',
+        #'allauth.socialaccount.providers.reddit',
+        #'allauth.socialaccount.providers.robinhood',
+        #'allauth.socialaccount.providers.shopify',
+        #'allauth.socialaccount.providers.slack',
+        #'allauth.socialaccount.providers.soundcloud',
+        #'allauth.socialaccount.providers.spotify',
+        #'allauth.socialaccount.providers.stackexchange',
+        #'allauth.socialaccount.providers.stripe',
+        #'allauth.socialaccount.providers.tumblr',
+        #'allauth.socialaccount.providers.twentythreeandme',
+        #'allauth.socialaccount.providers.twitch',
+        #'allauth.socialaccount.providers.twitter',
+        #'allauth.socialaccount.providers.untappd',
+        #'allauth.socialaccount.providers.vimeo',
+        #'allauth.socialaccount.providers.vk',
+        #'allauth.socialaccount.providers.weibo',
+        #'allauth.socialaccount.providers.weixin',
+        #'allauth.socialaccount.providers.windowslive',
+        #'allauth.socialaccount.providers.xing',
+        
         # ownstuff
         'psyfako_core',
         'timetable',
@@ -61,6 +124,11 @@ class Common(Configuration):
         'django.middleware.clickjacking.XFrameOptionsMiddleware',
     ]
     
+    AUTHENTICATION_BACKENDS = [
+        'django.contrib.auth.backends.ModelBackend', # Needed to login by username in Django admin, regardless of `allauth`
+        'allauth.account.auth_backends.AuthenticationBackend', # `allauth` specific authentication methods, such as login by e-mail
+    ]
+    
     ROOT_URLCONF = 'django_root.urls'
     
     TEMPLATES = [
@@ -74,6 +142,7 @@ class Common(Configuration):
                     'django.template.context_processors.request',
                     'django.contrib.auth.context_processors.auth',
                     'django.contrib.messages.context_processors.messages',
+                    'django.template.context_processors.request', # `allauth` needs this from django
                 ],
             },
         },
@@ -133,7 +202,10 @@ class Common(Configuration):
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.9/howto/static-files/
     
+    # urls stuff    
     STATIC_URL = '/static/'
+    LOGIN_REDIRECT_URL = "/"    
+    
     
     # Tagulous Serialization
     SERIALIZATION_MODULES = {
@@ -143,17 +215,51 @@ class Common(Configuration):
         'yaml':   'tagulous.serializers.pyyaml',
     }
     
-class dev(Common):
+    # allauth
+    # disable stupid username shit and enforce mail
+    # superuser bonus create with mail as username
+    ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+    ACCOUNT_EMAIL_REQUIRED = True
+    ACCOUNT_USERNAME_REQUIRED = False
+    ACCOUNT_AUTHENTICATION_METHOD = 'email'
+    
+    SITE_ID = 1
+    
+    # enforce good passwords
+    AUTH_PASSWORD_VALIDATORS = [
+        {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',},
+        {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator', },
+        {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator', },
+        {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+            'OPTIONS': {'min_length': 9, }
+        },
+    ]
+
+    
+    
+class devlocal(Common):
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True
     
+    # for local dev you need no password security :D
+    AUTH_PASSWORD_VALIDATORS = []
     
+    
+class devremote(Common):
+    # SECURITY WARNING: keep the secret key used in production secret!
+    SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
+    
+    # SECURITY WARNING: don't run with debug turned on in production!
+    DEBUG = True
+
+
 class stable(Common):
     # SECURITY WARNING: keep the secret key used in production secret!
     SECRET_KEY = '3i0c3!klxc+7+ci%u-&ql^^bu-4qc^on$vdch6+d1r7f=!(uk$'
     
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
+    
