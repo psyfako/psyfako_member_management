@@ -202,7 +202,10 @@ class Common(Configuration):
     # Static files (CSS, JavaScript, Images)
     # https://docs.djangoproject.com/en/1.9/howto/static-files/
     
+    # urls stuff    
     STATIC_URL = '/static/'
+    LOGIN_REDIRECT_URL = "/"    
+    
     
     # Tagulous Serialization
     SERIALIZATION_MODULES = {
