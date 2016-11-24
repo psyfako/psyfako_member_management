@@ -12,7 +12,7 @@ class Fachschaft(models.Model):
     mail = models.EmailField(max_length=254)
     
     def __str__(self):
-        return "Fachschaft " + self.university_type + " " +self.city
+        return self.university_type + " " +self.city
     
 
 class Member(models.Model):
@@ -23,15 +23,15 @@ class Member(models.Model):
     
     # extendet user stats
     address_street       = models.CharField(max_length=240, blank=True)
-    address_streetnumber = models.IntegerField()
+    address_streetnumber = models.IntegerField(blank=True)
     address_city         = models.CharField(max_length=240, blank=True)
-    address_citycode     = models.IntegerField()
+    address_citycode     = models.IntegerField(blank=True)
     
     mobilephone = PhoneNumberField(blank=True)
     
     #Allergy tagging field comes here
     # allergys = 
-    fachschaft = models.ForeignKey('Fachschaft', on_delete=models.CASCADE,)
+    fachschaft = models.ForeignKey('Fachschaft', on_delete=models.CASCADE, blank=True)
     
     is_konrat   = models.BooleanField(default=False)
     is_vorstand = models.BooleanField(default=False)
