@@ -108,6 +108,7 @@ class Common(Configuration):
         
         # ownstuff
         'psyfako_core',
+        'rooms',
         'timetable',
         'dashboard',
         

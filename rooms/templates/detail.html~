@@ -1,0 +1,6 @@
+<h1>{{ slot.name }}</h1>
+<ul>
+{% for workgroup in slot.workgroup_set.all %}
+    <li>{{ workgroup.title }}</li>
+{% endfor %}
+</ul>

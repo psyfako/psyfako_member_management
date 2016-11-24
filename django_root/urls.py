@@ -27,7 +27,8 @@ urlpatterns = [
     url(r'^accounts/', include('allauth.urls')),
     url(r'^accounts/profile/', include('allauth.urls')),
 
-    #url(r'^time/', include('timetable.urls')),
+    url(r'^rooms/', include('rooms.urls')),
+    url(r'^time/', include('timetable.urls')),
     #url(r'^main/', include('psyfako_core.urls')),
     
     # bonus
