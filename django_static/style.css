@@ -136,3 +136,147 @@ a{
     -moz-box-shadow: 0px -2px 2px 0px rgba(156,156,156,1);
     box-shadow: 0px -2px 2px 0px rgba(156,156,156,1);
 }
+
+h1{
+	margin: 0px;
+     font-size: 20pt;
+}
+
+.date-nav{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    left: 50%;
+    margin-left: -160px;
+    height: 40px;
+    width: 320px;
+}
+
+.date{
+    width: 290px;
+    text-align: center;
+    float: left;
+    height: 40px;
+    line-height: 40px;
+}
+
+.arrow-left {
+	width: 0; 
+	height: 0; 
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent; 
+  	border-right:15px solid #464646; 
+	float: left;
+}
+
+.arrow-right {
+	width: 0; 
+	height: 0; 
+	border-top: 20px solid transparent;
+	border-bottom: 20px solid transparent;  
+	border-left: 15px solid #464646;
+	float: right;
+}
+
+.timeslots{
+    position: relative;
+    left: 50%;
+    top: 10px;
+    transform: translate(-50%, 0%);
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.slot{
+    background-color: white;
+    width: 320px;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+    float: left;
+
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+    box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+}
+
+.program-circle{
+	float: left;
+	font-family: 'robotoslab';
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	background-color: #D27870;
+	color: white;
+	text-align: center;
+	line-height: 30px;
+}
+
+.slot header{
+	height: 40px;
+	line-height: 30px;
+	border-bottom: 1px solid #464646; 
+	font-family: 'robotoslab';
+}
+
+.slot header h3 {
+    position: relative;
+    left: 5px;
+}
+
+.program-time{
+	height: 11pt;
+	font-size: 11pt;
+	color: #6D6D6D;
+	position: relative;
+	left: 220px;
+	top: -70px;
+}
+
+.program span{
+	white-space:nowrap;
+}
+
+.workgroup{
+    width: 300px;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+
+.workgroup h5{
+    font-size: 16pt;
+    margin: 2px;
+    border-bottom: 1px solid #464646; 
+}
+
+.open-group{
+    background-color: #98ff72ff;
+}
+
+.exchange-group{
+    background-color: #c9e6e6ff;
+}
+
+.working-group{
+    background-color: #ff9b62ff;
+}
+
+.position-group{
+    background-color: #ffe460ff;
+}
+
+.protocol-icon{
+	float: right;
+	height: 24px;
+	width: 24px;
+	background:url(protocol-icon.png);
+	position: relative;
+	top: -5px;
+     right: 5px;
+}
+
+.protocol-icon:hover{
+	background:url(protocol-icon-hover.png);
+}
+
