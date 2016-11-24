@@ -1,0 +1,37 @@
+{% extends 'globalbase.html' %}
+{% load static %} 
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'timetable/style.css' %}" />
+
+<div class="date-nav"><div class="arrow-left"></div><div class="date">Freitag</div><div class="arrow-right"></div></div>
+
+{% if slot_list %}
+    {% for slot in slot_list %}
+        <div class = "timeslots">
+        <div class = "slot">
+            <h4><a href="{% url 'timetable:detail' slot.id %}">{{ slot.name }}</a></h4>
+            <div> {{slot.start_time|time:"H:i"}} - {{slot.end_time|time:"H:i"}} </div>
+                {% for workgroup in slot.workgroup_set.all %}
+                {% if workgroup.group_type == "O" %}
+                <div class = "workgroup open-group">
+                {% elif workgroup.group_type == "A" %}
+                <div class = "workgroup exchange-group">
+                {% elif workgroup.group_type == "W" %}
+                <div class = "workgroup working-group">
+                {% elif workgroup.group_type == "P" %}
+                <div class = "workgroup position-group">
+                {% endif %}
+                <h5>{{workgroup.title}}</h5>
+                Moderation:{{workgroup.moderation}}<br>
+                Protokoll: {{workgroup.protocol}} <br>
+                Raum: <a href="{% url 'rooms:detail' workgroup.room.id %}">{{workgroup.room.name}} ({{workgroup.room.building.short_name}}/{{workgroup.room.floor}}.{{workgroup.room.nr}})</a>
+                </div>
+                {% endfor %}
+        </div>
+        <div>
+    {% endfor %}
+{% else %}
+    <p>Für die Konferenz wurden noch keine Zeitslots festgelegt.</p>
+{% endif %}
+{% endblock content %}

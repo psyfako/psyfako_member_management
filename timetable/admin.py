@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Slot
+from .models import Workgroup
+
+admin.site.register(Slot)
+admin.site.register(Workgroup)
+
