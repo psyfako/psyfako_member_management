@@ -1,17 +1,30 @@
 {% extends 'globalbase.html' %}
 {% load static %} 
 
+{% block title %}
+PsyFaKo-App | Zeitplan
+{% endblock title %}
+
+{% block headertitle %}
+Zeitplan
+{% endblock headertitle %}
+
 {% block content %}
 <link rel="stylesheet" type="text/css" href="{% static 'timetable/style.css' %}" />
 
-<div class="date-nav"><div class="arrow-left"></div><div class="date">Freitag</div><div class="arrow-right"></div></div>
+<div class="date-nav"><a href="{% url 'timetable:index' year=year month=month day=day_before %}"><div class="arrow-left"></div></a><div class="date"><h1>{{weekday}}, {{day}}.{{month}}.</h1></div><a href="{% url 'timetable:index' year=year month=month day=day_after %}"><div class="arrow-right"></div></a></div>
 
 {% if slot_list %}
+    <div class = "timeslots">
     {% for slot in slot_list %}
-        <div class = "timeslots">
+        
         <div class = "slot">
-            <h4><a href="{% url 'timetable:detail' slot.id %}">{{ slot.name }}</a></h4>
-            <div> {{slot.start_time|time:"H:i"}} - {{slot.end_time|time:"H:i"}} </div>
+                <header>
+				<div class="program-circle">{{ slot.short_name }}</div>
+				<h3><a href="{% url 'timetable:detail' slot.id %}">{{ slot.name }}</a></h3>
+				<div class="program-time"> {{slot.start_time|time:"H:i"}}h - {{slot.end_time|time:"H:i"}}h </div>
+        	     </header>
+                {%if slot.workgroup_set.all%}
                 {% for workgroup in slot.workgroup_set.all %}
                 {% if workgroup.group_type == "O" %}
                 <div class = "workgroup open-group">
@@ -23,15 +36,19 @@
                 <div class = "workgroup position-group">
                 {% endif %}
                 <h5>{{workgroup.title}}</h5>
-                Moderation:{{workgroup.moderation}}<br>
-                Protokoll: {{workgroup.protocol}} <br>
-                Raum: <a href="{% url 'rooms:detail' workgroup.room.id %}">{{workgroup.room.name}} ({{workgroup.room.building.short_name}}/{{workgroup.room.floor}}.{{workgroup.room.nr}})</a>
+                <b>Moderation:</b> {{workgroup.moderation}}<br> 
+                <b>Protokoll:</b> {{workgroup.protocol}} <br>
+                <b>Raum:</b> <a href="{% url 'rooms:detail' workgroup.room.id %}">{{workgroup.room.name}} ({{workgroup.room.building.short_name}}/{{workgroup.room.floor}}.{{workgroup.room.nr}})</a>
+                <a href="https://piratenpad.de/p/PsyFaKo-{{workgroup.id}}-{{slot.short_name}}" target="_blank"><div class="protocol-icon"></div></a>                
                 </div>
                 {% endfor %}
-        </div>
-        <div>
+                {% else %}
+                <p>Noch keine Arbeitskreise eingetragen.</p>
+                {% endif %}
+            </div>        
     {% endfor %}
+    </div>
 {% else %}
-    <p>Für die Konferenz wurden noch keine Zeitslots festgelegt.</p>
+    <p>Für diesen Tag wurden noch keine Zeitslots festgelegt.</p>
 {% endif %}
 {% endblock content %}

@@ -1,7 +1,39 @@
-<h1>{{ room.name }}</h1>
-<ul>
-    <li>Gebäude: {{room.building.name}} ({{room.building.short_name}})</li>
-    <li>Stockwerk: {{room.floor}}</li>
-    <li>Raum-Nr: {{room.nr}}</li>
-    <li>Kapazität: {{room.capacity}}</li>
-</ul>
+{% extends 'globalbase.html' %}
+{% load static %} 
+
+{% block title %}
+PsyFaKo-App | Raumansicht
+{% endblock title %}
+
+{% block headertitle %}
+Räume
+{% endblock headertitle %}
+
+{% block content %}
+<div id="room-detail">
+    <h1>{{ room.name }}</h1>
+    <ul>
+        <li>Gebäude: {{room.building.name}} ({{room.building.short_name}})</li>
+        <li>Stockwerk: {{room.floor}}</li>
+        <li>Raum-Nr: {{room.nr}}</li>
+        <li>Kapazität: {{room.capacity}}</li>
+    </ul>
+<div id="map"></div>
+<script>
+      function initMap() {
+        var building = {lat: {{room.building.lat}}, lng:{{room.building.lng}} };
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 17,
+          center: building
+        });
+        var marker = new google.maps.Marker({
+          position: building,
+          map: map
+        });
+      }
+</script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcYmRnxqybcdwc2rfUUyODlauzto1cRGI&callback=initMap">
+    </script>
+</div>
+{% endblock content %}

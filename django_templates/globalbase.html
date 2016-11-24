@@ -8,51 +8,32 @@
     <head>
 
         <title> 
-            {% block title %} 
-                globalbase.html
-            {% endblock %} 
+            {% block title %}globalbase.html{% endblock %} 
         </title>
         <link rel="icon" href="{% static 'favicon.ico' %}">
-
-
+        <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     </head>
     
-    <header>
-    
-        <h1> 
-            {% block headertitle %} 
-                globalbase.html
-            {% endblock %} 
-        </h1>
-        
-        {% if user.is_authenticated %}
-            WAS IST DAS
-            <li>Hi {{ user.username }} you are Awesome!
-            <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-            <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-	{% else %}
-            <li><a href="{% url 'account_login' %}">Sign In</a></li>
-            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-    
-    </header>
-
     <body>
+        <div id ="global-header">
+            <img src="{% static 'app-logo.png' %}" id="app-logo">
+            <div id="header-title"> 
+                - {% block headertitle %} globalbase.html {% endblock %} 
+            </div>
+            <div id="menu">
+            	<a href="timetable.html">Timetable</a> | <a href="messages.html">Messages</a>
+	       </div>
+        </div>
+        {% if user.is_authenticated %}
+        <div id="greeting">Hi {{ user.username }}, you are Awesome! <a href="{% url 'account_logout' %}">Sign Out</a></div>
+        {% else %}
+        <a href="{% url 'account_login' %}">Sign In</a>
+        <a href="{% url 'account_signup' %}">Sign Up</a>
+        {% endif %}
 
-        {% block content %}
-        
-        {% endblock %}
-
+        <div id="content">
+            {% block content %}{% endblock content%}
+        </div>
+        <div id="global-footer"> PsyFaKo e.V. | check this project out at <a href="https://github.com/psyfako/psyfako_member_management">github</a></div>
     </body>
-    
-    <footer>
-        
-        <ul>
-            <li>PsyFaKo e.V.</li>
-            <li>||</li>
-            <li>Check out this porject at <a href="https://github.com/psyfako/psyfako_member_management"> github.com </a> </li>
-        </ul> 
-    
-    </footer>
-
 </html>
