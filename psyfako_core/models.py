@@ -11,6 +11,9 @@ class Fachschaft(models.Model):
     city = models.CharField(max_length=240, blank=True)
     mail = models.EmailField(max_length=254)
     
+    def __str__(self):
+        return "Fachschaft " + self.university_type + " " +self.city
+    
 
 class Member(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -32,6 +35,9 @@ class Member(models.Model):
     
     is_konrat   = models.BooleanField(default=False)
     is_vorstand = models.BooleanField(default=False)
+    
+    def __str__(self):
+        return self.nickname + " (" +self.fachschaft.university_type + " " + self.fachschaft.city + ")"
     
 
 class Event(models.Model):
