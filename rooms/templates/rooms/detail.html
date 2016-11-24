@@ -18,7 +18,9 @@ Räume
         <li>Raum-Nr: {{room.nr}}</li>
         <li>Kapazität: {{room.capacity}}</li>
     </ul>
+{% if room.building.lat != "" and room.building.lng != "" %}
 <div id="map"></div>
+{% endif %}
 <script>
       function initMap() {
         var building = {lat: {{room.building.lat}}, lng:{{room.building.lng}} };

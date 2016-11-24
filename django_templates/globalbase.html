@@ -21,7 +21,7 @@
                 - {% block headertitle %} globalbase.html {% endblock %} 
             </div>
             <div id="menu">
-            	<a href="timetable.html">Timetable</a> | <a href="messages.html">Messages</a>
+            	<a href="{% url 'timetable:index' %}">Timetable</a> | <a href="{% url 'conmessages:index' %}">Messages</a>
 	       </div>
         </div>
         {% if user.is_authenticated %}

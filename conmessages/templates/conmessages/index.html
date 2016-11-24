@@ -1,0 +1,27 @@
+{% extends 'globalbase.html' %}
+{% load static %} 
+
+{% block title %}
+PsyFaKo-App | Nachrichten
+{% endblock title %}
+
+{% block headertitle %}
+Nachrichten
+{% endblock headertitle %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'conmessages/style.css' %}" />
+
+{% if conmsg_list %}
+{% for msg in conmsg_list %}
+    <div class="msg">
+        <h4>{{msg.time_sent.day}}.{{msg.time_sent.month}}. - {{msg.time_sent.hour}}:{{msg.time_sent.minute}}h :</h4>
+        {{msg.content}}
+    </div>
+{% endfor %}
+{% else %}
+No messages at the moment.
+{% endif %}
+
+{% endblock content %}
+

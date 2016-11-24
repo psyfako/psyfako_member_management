@@ -29,6 +29,7 @@ urlpatterns = [
 
     url(r'^rooms/', include('rooms.urls')),
     url(r'^time/', include('timetable.urls')),
+    url(r'^messages/', include('conmessages.urls')),
     #url(r'^main/', include('psyfako_core.urls')),
     
     # bonus

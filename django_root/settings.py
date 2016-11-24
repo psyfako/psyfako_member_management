@@ -146,6 +146,7 @@ class Common(Configuration):
         'rooms',
         'timetable',
         'dashboard',
+        'conmessages',
         
     ]
     

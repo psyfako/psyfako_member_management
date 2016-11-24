@@ -1,0 +1,13 @@
+.msg{
+    background-color: white;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    width: 500px;
+    position: relative;
+    left: 50%;
+    margin-left: -250px;
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+    -moz-box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+    box-shadow: 3px 3px 5px 0px rgba(110,99,110,1);
+}
