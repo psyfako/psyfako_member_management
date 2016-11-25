@@ -1,4 +1,4 @@
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 1150px) {
   #global-header{
     position: fixed;
     top: 0px;
@@ -26,10 +26,10 @@
   #menu{
     position: absolute;
     top: 50px;
-    font-size: 8%;
+    font-size: 100%;
     width: 100%;
-    height: 8%;
-    line-height: 8%;
+    height: 100%;
+    line-height: 100%;
     background-color: #B21B11;
     text-align: center;
     margin: 0px;
