@@ -39,7 +39,7 @@ Zeitplan
                 <b>Moderation:</b> {{workgroup.moderation}}<br> 
                 <b>Protokoll:</b> {{workgroup.protocol}} <br>
                 <b>Raum:</b> <a href="{% url 'rooms:detail' workgroup.room.id %}">{{workgroup.room.name}} ({{workgroup.room.building.short_name}}/{{workgroup.room.floor}}.{{workgroup.room.nr}})</a>
-                <a href="https://piratenpad.de/p/PsyFaKo-{{workgroup.id}}-{{slot.short_name}}" target="_blank"><div class="protocol-icon"></div></a>                
+                <a href="http://pad.psyfako.org:7733/p/PsyFaKo-{{workgroup.id}}-{{slot.short_name}}" target="_blank"><div class="protocol-icon"></div></a>                
                 </div>
                 {% endfor %}
                 {% else %}
