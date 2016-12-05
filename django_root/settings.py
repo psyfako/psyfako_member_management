@@ -271,6 +271,8 @@ class Common(Configuration):
             'OPTIONS': {'min_length': 9, }
         },
     ]
+    
+    TELEGRAM_BOT_TOKEN = parsedconfig.get('telegram', 'TELEGRAM_BOT_TOKEN' )
 
     
     
